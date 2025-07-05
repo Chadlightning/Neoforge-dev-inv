@@ -9,6 +9,10 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.minecraft.world.item.MaceItem;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraft.server.level.ServerPlayer;
+
+import com.fredtad.macemod.StartHitStopPacket;
 
 
 @EventBusSubscriber(modid = "maceimpactframes")   // default bus = GAME
@@ -26,6 +30,7 @@ public final class MaceImpactHandler {
         if (!data.getBoolean("macemod.pendingSlam")) return;
 
         // --- It *was* our mace smash ---
+        PacketDistributor.sendToPlayer((ServerPlayer) player, new StartHitStopPacket(6));
         data.remove("macemod.pendingSlam");          // consume the flag
 
         float damage = event.getNewDamage();         // final damage
