@@ -53,6 +53,7 @@ public class MaceMod    {
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
 
+
         if (Config.LOG_DIRT_BLOCK.getAsBoolean()) {
             LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
         }
