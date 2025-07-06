@@ -18,5 +18,6 @@ public record StartHitStopPacket(int duration) implements CustomPacketPayload {
 
     public static void handle(StartHitStopPacket payload, net.neoforged.neoforge.network.handling.IPayloadContext ctx) {
         ctx.enqueueWork(() -> HitStopHandler.startFreeze(payload.duration()));
+        System.out.println("GoonGang");
     }
 }
