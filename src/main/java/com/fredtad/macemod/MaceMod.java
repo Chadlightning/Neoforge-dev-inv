@@ -23,20 +23,30 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MaceMod.MOD_ID)
+
+
+
 public class MaceMod    {
+
+
+
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "maceimpactframes";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
+
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public MaceMod(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+
+        modEventBus.addListener(this::registerPayloads);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
@@ -68,6 +78,11 @@ public class MaceMod    {
 
     }
 
+    private void registerPayloads(RegisterPayloadHandlersEvent event) {
+        var reg = event.registrar(MOD_ID);   // create the registrar once
+        
+    }
+
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
@@ -82,4 +97,6 @@ public class MaceMod    {
 
         }
     }
+
+
 }
